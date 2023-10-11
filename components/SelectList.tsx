@@ -83,12 +83,12 @@ const SelectList: React.FC<SelectListProps> = ({
     if (!_firstRender && defaultOption && oldOption.current != defaultOption.key) {
       // oldOption.current != null
       oldOption.current = defaultOption.key;
-      setSelected(defaultOption.key);
+      setSelected({ key: defaultOption?.key, value: defaultOption?.value });
       setSelectedVal(defaultOption.value);
     }
     if (defaultOption && _firstRender && defaultOption.key != undefined) {
       oldOption.current = defaultOption.key;
-      setSelected(defaultOption.key);
+      setSelected({ key: defaultOption?.key, value: defaultOption?.value });
       setSelectedVal(defaultOption.value);
     }
   }, [defaultOption]);
@@ -191,12 +191,7 @@ const SelectList: React.FC<SelectListProps> = ({
                       style={[styles.option, dropdownItemStyles]}
                       key={index}
                       onPress={() => {
-                        if (save === "value") {
-                          setSelected(value);
-                        } else {
-                          setSelected(key);
-                        }
-
+                        setSelected({ key, value });
                         setSelectedVal(value);
                         slideup();
                         setTimeout(() => {
